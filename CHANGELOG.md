@@ -1,5 +1,10 @@
 # 更新日志
 
+## 0.1.4
+
+- 修复 GitHub Release 发布 job 缺少仓库检出的问题
+- 确保自动创建 Release 时可正确上传附件
+
 ## 0.1.3
 
 - 修复 GitHub Release 工作流中校验文件生成逻辑
