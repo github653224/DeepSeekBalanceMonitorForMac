@@ -1,5 +1,10 @@
 # 更新日志
 
+## 0.1.3
+
+- 修复 GitHub Release 工作流中校验文件生成逻辑
+- 避免对 `.app` 目录执行 `shasum` 导致发布中断
+
 ## 0.1.2
 
 - 修复 GitHub Actions 中 Python 包元数据兼容性问题
