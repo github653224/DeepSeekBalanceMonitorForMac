@@ -92,9 +92,15 @@ twine check dist/*.whl dist/*.tar.gz
 
 如果你希望用户更容易下载，也可以在 Release 里附带 SHA-256。
 
+如果你已经启用了仓库里的自动发布工作流，也可以直接推送 `vX.Y.Z` tag，让 GitHub Actions 自动创建 Release 并上传附件。具体见：
+
+- [GitHub Release 自动化说明](GITHUB_RELEASE_AUTOMATION.md)
+
 ## 5. PyPI 发布建议
 
 建议先发 TestPyPI，再发正式 PyPI。
+
+如果你已经按自动发布文档配置好了 PyPI Trusted Publisher，那么推送 `vX.Y.Z` tag 后也可以自动发布到 PyPI。
 
 上传到 TestPyPI：
 
