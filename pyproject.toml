@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deepseek-balance-monitor-mac"
+version = "0.1.0"
+description = "macOS menu bar monitor for DeepSeek API balance and usage"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+  { name = "Rock" }
+]
+license = "MIT"
+keywords = ["deepseek", "macos", "menu-bar", "balance-monitor", "rumps"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Operating System :: MacOS :: MacOS X",
+  "Environment :: MacOS X :: Cocoa",
+  "License :: OSI Approved :: MIT License",
+]
+dependencies = [
+  "requests>=2.31.0",
+  "Pillow>=10.0.0",
+  "rumps>=0.4.0",
+  "cryptography>=42.0.0",
+  "pyobjc-core>=10.0; sys_platform == 'darwin'",
+  "pyobjc-framework-Cocoa>=10.0; sys_platform == 'darwin'",
+]
+
+[project.optional-dependencies]
+build = [
+  "pyinstaller>=6.20.0",
+  "build>=1.2.2",
+  "twine>=5.1.1",
+]
+
+[project.scripts]
+deepseek-balance-monitor = "deepseek_balance_monitor_mac.mac.main:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+deepseek_balance_monitor_mac = [
+  "assets/AppIcon.png",
+  "assets/AppIcon.icns",
+  "assets/app.ico",
+  "assets/font/*.ttf",
+  "assets/*.png",
+]
