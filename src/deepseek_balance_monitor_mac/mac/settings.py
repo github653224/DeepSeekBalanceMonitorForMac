@@ -1,6 +1,7 @@
 import os
 import sys
 import tkinter as tk
+import webbrowser
 from tkinter import ttk, messagebox
 
 from deepseek_balance_monitor_mac.config import load_config, save_config, T as _T, CONFIG_DIR
@@ -25,6 +26,24 @@ APP_SIGNATURE = {
     "zh": "热爱技术的小牛",
     "en": "Tech Enthusiast Xiao Niu",
 }
+SOCIAL_HANDLE = "热爱技术的小牛"
+PROJECT_REPO_URL = "https://github.com/github653224/DeepSeekBalanceMonitorForMac"
+INFO_COPY = {
+    "zh": {
+        "section_title": "关注作者与项目",
+        "platforms": "抖音 / 今日头条 / 公众号 / 视频号 / 小红书",
+        "platforms_label": "全平台账号",
+        "repo_link": "GitHub 仓库",
+        "copyright": "Copyright @热爱技术的小牛",
+    },
+    "en": {
+        "section_title": "Creator & Project",
+        "platforms": "Douyin / Toutiao / Official Account / Channels / Xiaohongshu",
+        "platforms_label": "Creator handle",
+        "repo_link": "GitHub Repository",
+        "copyright": "Copyright @Tech Enthusiast Xiao Niu",
+    },
+}
 
 def T(key, lang="zh", **kwargs):
     """Local translation wrapper that falls back to global T."""
@@ -32,6 +51,28 @@ def T(key, lang="zh", **kwargs):
     if text:
         return text.format(**kwargs) if kwargs else text
     return _T(key, lang, **kwargs)
+
+
+def _copy_for(lang: str, key: str) -> str:
+    return INFO_COPY.get(lang, INFO_COPY["zh"]).get(key, INFO_COPY["zh"][key])
+
+
+def _make_link_label(parent, text: str, url: str, fg: str = "#0a66c2"):
+    label = tk.Label(
+        parent,
+        text=text,
+        fg=fg,
+        cursor="hand2",
+        font=("system", 11, "underline"),
+        bd=0,
+        highlightthickness=0,
+    )
+
+    def _open_link(_event=None):
+        webbrowser.open(url)
+
+    label.bind("<Button-1>", _open_link)
+    return label
 # ─── Eye icon (SVG-style drawn on Canvas) ─────────────────────────────────────
 _EYE_OPEN = (
     "M8 5C4.5 5 1.5 8 1.5 8S4.5 11 8 11 14.5 8 14.5 8 11.5 5 8 5z "
@@ -160,6 +201,9 @@ def run_settings():
     style.configure("TLabel", font=("system", 13), background=bg_color, foreground=fg_color)
     style.configure("TCheckbutton", font=("system", 13), background=bg_color, foreground=fg_color)
     style.configure("Title.TLabel", font=("system", 26, "bold"), background=bg_color, foreground=fg_color)
+    style.configure("Section.TLabel", font=("system", 14, "bold"), background=bg_color, foreground=fg_color)
+    style.configure("Meta.TLabel", font=("system", 11), background=bg_color, foreground="gray")
+    style.configure("Handle.TLabel", font=("system", 15, "bold"), background=bg_color, foreground=fg_color)
     
     # Standardize Button font
     style.configure("TButton", font=("system", 13))
@@ -259,12 +303,35 @@ def run_settings():
     ttk.Checkbutton(content, text=T("auto_start_label", lang),
                     variable=auto_start_var).pack(anchor="w", pady=(8, 4))
 
-    # ── Credits ───────────────────────────────────────────────────────────────
+    # ── Credits & Links ───────────────────────────────────────────────────────
     footer_info = ttk.Frame(content)
-    footer_info.pack(fill="x", pady=(15, 0))
-    ttk.Label(footer_info, text="Version 1.0.1", foreground="gray", font=("system", 11)).pack(anchor="center")
-    ttk.Label(footer_info, text=APP_SIGNATURE.get(lang, APP_SIGNATURE["zh"]),
-              foreground="gray", font=("system", 11)).pack(anchor="center")
+    footer_info.pack(fill="x", pady=(18, 0))
+
+    ttk.Separator(footer_info, orient="horizontal").pack(fill="x", pady=(0, 14))
+    ttk.Label(footer_info, text=_copy_for(lang, "section_title"), style="Section.TLabel").pack(anchor="center")
+    ttk.Label(footer_info, text=_copy_for(lang, "platforms"), style="Meta.TLabel").pack(anchor="center", pady=(8, 0))
+    ttk.Label(
+        footer_info,
+        text=f"{_copy_for(lang, 'platforms_label')}：@{SOCIAL_HANDLE}",
+        style="Handle.TLabel",
+    ).pack(anchor="center", pady=(4, 0))
+
+    links_frame = ttk.Frame(footer_info)
+    links_frame.pack(anchor="center", pady=(10, 0))
+
+    copyright_label = ttk.Label(
+        links_frame,
+        text=_copy_for(lang, "copyright"),
+        style="Meta.TLabel",
+    )
+    copyright_label.pack(side="left")
+    ttk.Label(links_frame, text="  |  ", style="Meta.TLabel").pack(side="left")
+
+    repo_link = _make_link_label(links_frame, _copy_for(lang, "repo_link"), PROJECT_REPO_URL)
+    repo_link.configure(bg=root.cget("bg"))
+    repo_link.pack(side="left")
+
+    ttk.Label(footer_info, text="Version 1.0.1", style="Meta.TLabel").pack(anchor="center", pady=(8, 0))
 
     # ── Buttons ───────────────────────────────────────────────────────────────
     btn_frame = ttk.Frame(main_frame)
