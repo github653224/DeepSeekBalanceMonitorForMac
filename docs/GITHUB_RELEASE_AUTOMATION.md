@@ -21,6 +21,12 @@
 8. 上传 release 附件
 9. 按需发布到 PyPI（前提是你已经配置好 PyPI Trusted Publisher，并开启仓库变量）
 
+说明：
+
+- GitHub Release 会上传 `.zip`、`.dmg`、`.whl`、`.tar.gz`
+- 但 PyPI 只接受 Python 分发包，所以发布到 PyPI 时必须只传 `wheel` 和 `sdist`
+- 当前工作流已单独整理 `pypi-dist/`，避免把 `.dmg`、`.zip` 误传给 PyPI
+
 ## 2. 以后怎么发 GitHub Release
 
 每次发布建议这样做：

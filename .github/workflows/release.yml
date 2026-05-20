@@ -114,7 +114,13 @@ jobs:
           name: release-assets
           path: dist
 
+      - name: Prepare PyPI distributions only
+        run: |
+          mkdir -p pypi-dist
+          cp dist/*.whl pypi-dist/
+          cp dist/*.tar.gz pypi-dist/
+
       - name: Publish Python distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          packages-dir: dist
+          packages-dir: pypi-dist
