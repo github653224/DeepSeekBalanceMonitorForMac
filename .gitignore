@@ -30,4 +30,4 @@ pip-wheel-metadata/
 
 # Local private docs
 README.local.md
-docs/TECHNICAL_DEVELOPMENT_JOURNAL_*.md
+docs/*.md
