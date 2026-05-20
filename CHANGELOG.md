@@ -1,5 +1,11 @@
 # 更新日志
 
+# 0.1.5
+
+- 补充面向 GitHub 开源的中文说明文档
+- 增加界面预览与下载入口说明
+- 完善 PyPI / GitHub Release 发布指引
+
 ## 0.1.4
 
 - 修复 GitHub Release 发布 job 缺少仓库检出的问题

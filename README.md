@@ -4,6 +4,8 @@
 
 它会常驻菜单栏，帮助你快速查看余额、今日消耗、日均消耗和服务状态，并在余额不足或消耗异常时提醒你。
 
+[下载最新版本](https://github.com/github653224/DeepSeekBalanceMonitorForMac/releases/latest)
+
 ## 项目定位
 
 - mac 原生菜单栏应用
@@ -27,6 +29,29 @@
 - 本地 SQLite 历史记录
 - CSV 导出
 - 本地安全存储 API Key
+
+## 界面预览
+
+菜单栏主界面：
+
+![菜单栏主界面](docs/images/screenshots/menu-bar.png)
+
+设置窗口：
+
+![设置窗口](docs/images/screenshots/settings-window.png)
+
+低余额提醒：
+
+![低余额提醒](docs/images/screenshots/low-balance-alert.png)
+
+## 为什么值得用
+
+- 菜单栏常驻，打开电脑就能看到余额状态
+- 不用反复打开网页，查询路径更短
+- 支持低余额阈值提醒和日消耗提醒
+- 支持历史记录沉淀，方便回看消耗变化
+- 支持本地运行、`.app` 分发和 `.dmg` 安装
+- 已开源，可自行审查代码和二次开发
 
 ## 快速开始
 
@@ -81,6 +106,17 @@ bash scripts/build_mac.sh
 bash scripts/build_dmg.sh
 ```
 
+## 下载与安装
+
+普通用户建议直接前往 GitHub Releases 下载：
+
+- `.dmg`：适合 mac 用户安装使用
+- `.zip`：适合手动解压体验
+
+下载地址：
+
+- [GitHub Releases](https://github.com/github653224/DeepSeekBalanceMonitorForMac/releases)
+
 ## 项目结构
 
 ```text
@@ -102,6 +138,7 @@ DeepSeekBalanceMonitorForMac/
 更多说明见：
 
 - [开发指南](docs/DEVELOPMENT_GUIDE.md)
+- [公众号文章草稿](docs/WECHAT_ARTICLE_DEEPSEEK_MONITOR_OPEN_SOURCE.md)
 - [发布指南](docs/RELEASE_GUIDE.md)
 - [贡献指南](CONTRIBUTING.md)
 - [安全说明](SECURITY.md)

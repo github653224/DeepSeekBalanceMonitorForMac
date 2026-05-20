@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "deepseek-balance-monitor-mac"
-version = "0.1.4"
+version = "0.1.5"
 description = "macOS menu bar monitor for DeepSeek API balance and usage"
 readme = "README.md"
 requires-python = ">=3.11"
